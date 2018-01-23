@@ -10,13 +10,14 @@ function getAndPrintHTML () {
   https.get(requestOptions, function (response) {
 
     response.setEncoding('utf8');
+    var newArr = [];
 
     response.on('data', function (data) {
-      var newArr = [];
-      for (var i = 0; i < data.length; i++) {
-        newArr.push(data[i]);
-      }
-      console.log('Buffer:', data);
+      newArr.push(data);
+    });
+
+    response.on('end', function() {
+      console.log(newArr.join(''));
     });
 
   });
